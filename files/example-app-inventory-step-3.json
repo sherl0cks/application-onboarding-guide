@@ -1,0 +1,66 @@
+{
+  "openshift_clusters": [
+    {
+      "openshift_resources": {
+        "projects": [
+          {
+            "name": "labs-ci-cd",
+            "templates": [
+              {
+                "filename": "files/java-app-build-template.json",
+                "parameters": {
+                  "PIPELINE_SOURCE_REPOSITORY_URL": "https://github.com/sherl0cks/application-onboarding-guide",
+                  "PIPELINE_SOURCE_REPOSITORY_REF": "initial-content",
+                  "PIPELINE_CONTEXT_DIR": "builds/helloworld-java-rest-api",
+                  "NAME": "helloworld-java-rest-api"
+                }
+              }
+            ]
+          },
+          {
+            "name": "acme-dev",
+            "display_name": "Acme Development",
+            "templates": [
+              {
+                "filename": "files/java-app-deploy-template.json",
+                "parameters": {
+                  "APP_NAMESPACE": "acme-dev",
+                  "PIPELINES_NAMESPACE": "labs-ci-cd",
+                  "NAME": "helloworld-java-rest-api"
+                }
+              }
+            ]
+          },
+          {
+            "name": "acme-test",
+            "display_name": "Acme Test",
+            "templates": [
+              {
+                "filename": "files/java-app-deploy-template.json",
+                "parameters": {
+                  "APP_NAMESPACE": "acme-test",
+                  "PIPELINES_NAMESPACE": "labs-ci-cd",
+                  "NAME": "helloworld-java-rest-api"
+                }
+              }
+            ]
+          },
+          {
+            "name": "acme-uat",
+            "display_name": "Acme User Acceptance Test",
+            "templates": [
+              {
+                "filename": "files/java-app-deploy-template.json",
+                "parameters": {
+                  "APP_NAMESPACE": "acme-uat",
+                  "PIPELINES_NAMESPACE": "labs-ci-cd",
+                  "NAME": "helloworld-java-rest-api"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

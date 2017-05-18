@@ -1,0 +1,8 @@
+inventory
+*.retry
+roles
+ansible-stacks
+vars/openshift-vars.json
+vars/openshift-vars.yaml
+vars/openshift-vars.yml
+builds/helloworld-java-rest-api/target
