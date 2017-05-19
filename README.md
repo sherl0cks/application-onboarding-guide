@@ -1,5 +1,12 @@
 # Application Onboarding Guide
 
+## tl;dr I just want to run it
+
+- copy `files/example-app-inventory-step-3.json` into the `vars` directory
+- execute `run.sh`
+
+## Introduction
+
 This guide assumes:
 - You are using [the CI-CD Starter](https://github.com/rht-labs/examples/tree/master/ci-cd-starter) or a version of it. It's possible to take a different approach, but we haven't documented that
 - You are onboarding a Java app that builds into an uber jar (TODO - guide for web apps)
