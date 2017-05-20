@@ -7,7 +7,7 @@
             "name": "labs-ci-cd",
             "templates": [
               {
-                "filename": "files/java-app-build-template.json",
+                "filename": "https://raw.githubusercontent.com/rht-labs/openshift-templates/master/java-app-build-template.json",
                 "parameters": {
                   "PIPELINE_SOURCE_REPOSITORY_URL": "https://github.com/sherl0cks/application-onboarding-guide",
                   "PIPELINE_SOURCE_REPOSITORY_REF": "initial-content",
@@ -22,7 +22,7 @@
             "display_name": "Acme Development",
             "templates": [
               {
-                "filename": "files/java-app-deploy-template.json",
+                "filename": "https://raw.githubusercontent.com/rht-labs/openshift-templates/master/java-app-deploy-template.json",
                 "parameters": {
                   "APP_NAMESPACE": "acme-dev",
                   "PIPELINES_NAMESPACE": "labs-ci-cd",
@@ -36,7 +36,7 @@
             "display_name": "Acme Test",
             "templates": [
               {
-                "filename": "files/java-app-deploy-template.json",
+                "filename": "https://raw.githubusercontent.com/rht-labs/openshift-templates/master/java-app-deploy-template.json",
                 "parameters": {
                   "APP_NAMESPACE": "acme-test",
                   "PIPELINES_NAMESPACE": "labs-ci-cd",
@@ -50,7 +50,7 @@
             "display_name": "Acme User Acceptance Test",
             "templates": [
               {
-                "filename": "files/java-app-deploy-template.json",
+                "filename": "https://raw.githubusercontent.com/rht-labs/openshift-templates/master/java-app-deploy-template.json",
                 "parameters": {
                   "APP_NAMESPACE": "acme-uat",
                   "PIPELINES_NAMESPACE": "labs-ci-cd",

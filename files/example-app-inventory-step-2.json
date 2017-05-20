@@ -8,7 +8,7 @@
             "display_name": "Labs CI / CD",
             "templates": [
               {
-                "filename": "files/java-app-build-template.json",
+                "filename": "https://raw.githubusercontent.com/rht-labs/openshift-templates/master/java-app-build-template.json",
                 "parameters": {
                   "PIPELINE_SOURCE_REPOSITORY_URL": "https://github.com/sherl0cks/application-onboarding-guide",
                   "PIPELINE_SOURCE_REPOSITORY_REF": "initial-content",
