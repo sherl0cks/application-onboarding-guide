@@ -1,0 +1,26 @@
+{
+  "openshift_clusters": [
+    {
+      "openshift_resources": {
+        "projects": [
+          {
+            "name": "labs-ci-cd",
+            "display_name": "Labs CI / CD"
+          },
+          {
+            "name": "acme-dev",
+            "display_name": "Acme Development"
+          },
+          {
+            "name": "acme-test",
+            "display_name": "Acme Test"
+          },
+          {
+            "name": "acme-uat",
+            "display_name": "Acme User Acceptance Test"
+          }
+        ]
+      }
+    }
+  ]
+}

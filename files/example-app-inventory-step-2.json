@@ -1,0 +1,37 @@
+{
+  "openshift_clusters": [
+    {
+      "openshift_resources": {
+        "projects": [
+          {
+            "name": "labs-ci-cd",
+            "display_name": "Labs CI / CD",
+            "templates": [
+              {
+                "filename": "https://raw.githubusercontent.com/rht-labs/openshift-templates/master/java-app-build-template.json",
+                "parameters": {
+                  "PIPELINE_SOURCE_REPOSITORY_URL": "https://github.com/sherl0cks/application-onboarding-guide",
+                  "PIPELINE_SOURCE_REPOSITORY_REF": "initial-content",
+                  "PIPELINE_CONTEXT_DIR": "builds/helloworld-java-rest-api",
+                  "NAME": "helloworld-java-rest-api"
+                }
+              }
+            ]
+          },
+          {
+            "name": "acme-dev",
+            "display_name": "Acme Development"
+          },
+          {
+            "name": "acme-test",
+            "display_name": "Acme Test"
+          },
+          {
+            "name": "acme-uat",
+            "display_name": "Acme User Acceptance Test"
+          }
+        ]
+      }
+    }
+  ]
+}
