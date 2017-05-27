@@ -1,14 +1,9 @@
 # Application Onboarding Guide
 
-## tl;dr I just want to run it
-
-- copy `files/example-app-inventory-step-3.json` into the `vars` directory
-- execute `run.sh`
-
 ## Introduction
 
 This guide assumes:
-- You are using [the CI-CD Starter](https://github.com/rht-labs/examples/tree/master/ci-cd-starter) or a version of it. It's possible to take a different approach, but we haven't documented that
+- You are planning to use [the CI-CD Starter](https://github.com/rht-labs/examples/tree/master/ci-cd-starter) or a version of it, and that this automation will be run before try to do anything with your specific application.  It's possible to take a different approach, but we haven't documented that
 - You are onboarding a Java app that builds into an uber jar (TODO - guide for web apps)
 - Your app exposes a REST API on port `8080`
 - Your app does not require external services (e.g. a database) to be available in order to boot up and operate
@@ -80,7 +75,11 @@ OpenShift natively supports a [Pipeline Build Strategy](https://docs.openshift.c
 With the projects in place and our application ready to go, we can reuse the provided templates to provision the Jenkins Pipeline and the S2I build that will create our container image. Again, we'll leverage [an example](files/example-app-inventory-step-2.json) to help get us started.
 
 - Update the `labs-ci-cd` project in `vars/application-inventory.json` with the `templates` section found on lines 9-19. Don't forget to add a comma at the end of your line 8.
-- The `filename` property tells `oc process` where to find the template either as a local file (relative to `run.sh`), or as a `http(s)` resource. In this case, we're using an `http(s)` resource. Open this URL and read through it. You'll notice it has two `BuildConfigs`, one for the Jenkins pipeline, and one for S2I build to create the container image. Also notice that the template uses several parameters, which you'll need to populate with values that correspond to your app.
+- The `filename` property tells `oc process` where to find the template either as a local file (relative to `run.sh`), or as a `http(s)` resource. In this case, we're using an `http(s)` resource. Open this URL and read through it. You'll notice it has two `BuildConfigs`, one for the Jenkins pipeline, and one for S2I build to create the container image. Also notice that the template uses several parameters, which you'll need to populate with values that correspond to your app. This particular template is set up for source repositories that are accessible from your Jenkins *without* authentication.
+- If you are using a repository that is accessible from your Jenkins, but requires `basic http(s)` authentication, you'll need to complete the next several sub bullets. Other users should skip these sub bullets
+  - Update the `filename` property to `https://raw.githubusercontent.com/rht-labs/openshift-templates/master/java-app-build-with-secret-template.json`. This template is almost identical to the previous template, but it has a parameter that will allow you to pass [a secret to the BuildConfig](https://docs.openshift.com/container-platform/3.5/dev_guide/builds/build_inputs.html#using-secrets-during-build) which contains your credentials for the git repo. By default, we assume this secret is called `git-secret` and that it is in the same OpenShift project as Jenkins. If you follow this default, you don't need to add any new parameters to your `Application Inventory`. We'll add instructions to configure the defaults later, but for now, please follow them.
+  - Create a basic authentication secret in your ci-cd project, if you followed all the defaults, the command to do this is: `oc secrets new-basicauth git-secret --username=<username-for-git-repo> --password=<password-for-git-repo> -n labs-ci-cd`
+- If you are using a repository that is accessible from your Jenkins, but requires `ssh-key` authentication, know that it is possible, but this guide currently does not document how to do it.
 - Update the value of `PIPELINE_SOURCE_REPOSITORY_URL` with the git repository url for your app. Note that this will be used by Jenkins to clone your source code, so the VCS needs to be visible to Jenkins on the network, and if using `ssh`, your Jenkins needs to be configured with the `ssh-key`.
 - Update `PIPELINE_SOURCE_REPOSITORY_REF` with the git ref for your app. If using `master`, you can remove this line if you wish.
 - If your `Jenkinsfile` is not in the root directory, update `PIPELINE_CONTEXT_DIR` with it's location. If the `Jenkinsfile` is in the root directory, you have the option of deleting this line.
